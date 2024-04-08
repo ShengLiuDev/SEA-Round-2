@@ -4,67 +4,129 @@ body {
     padding: 0;
 }
 
+/* 
+justify content is horizontal alignment
+align items is vertical
+
+*/
+
+@font-face {
+    font-family: arista-light;
+    src: url('/font/Arista-Pro-Light-trial.ttf');
+
+}
+
+/* https://htmlcolorcodes.com/colors/dark-green/ */
 .main-header {
-    background-color: rgba(0, 0, 0, .3);
+    background-color: #FFFC00;
     padding-bottom: 10px;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.08), 0 10px 10px 0 rgba(0, 0, 0, 0.12);
+    padding-bottom: 1200px;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    position: fixed; /* this makes the header follow us  */
+    /* https://stackoverflow.com/questions/63405967/how-do-you-add-a-shadow-underneath-a-header-that-is-gray-and-blurry-in-css */
+}
+
+.title-button {
+    background: none;
+    border: none;
+    color: inherit;
+    font-family: inherit;
+    margin: 0;
+    cursor: pointer;
+    outline: none;
+    font-size: 70px;
+    text-decoration: none;
+    text-align: center;
+    justify-content: center;
+    padding-top: 40px;
+    margin-left: 190px;
+}
+
+.top-header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
 }
 
 .title {
+    color: black;
+    margin-top: auto;
     text-align: center;
-    margin: 0;
-    font-size: 8em;
-    font-family: "Helvetica";
-    font-weight: normal;
-    color: white;
-}
-
-#card-container {
+    font-family: arista-light;
+    padding-top: 35px;
+    padding-left: 150px;
+    font-size: 70px;
+    flex-grow: 1;
     display: flex;
     justify-content: center;
-    margin: 20px;
+    align-items: center;
 }
 
-.card {
-    width: 300px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    margin: 5px;
+.header-icons {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding-right: 30px;
+    gap: 20px;
 }
 
-.card-content {
-    padding: 20px;
-    font-family: "Verdana";
-    color: #777;
+.logo-icon {
+    height: 90px;
+    margin-right: 20px;
+    margin-top: 20px;
 }
 
-.card-content h2 {
-    margin-top: 0;
-    font-size: 20px;
+.title-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.card img {
+.navbar {
     width: 100%;
-    height: auto;
-}
-
-.footer {
+    font-family: arista-light;
+    text-decoration: none;
+    font-size: 25px;
     display: flex;
+    gap: 100px;
+    align-items: center;
     justify-content: center;
-    background-color: rgba(0, 0, 0, .3);
-    padding: 10px;
+    color: black;
+    padding-top: 20px;
+    position: relative;
 }
 
-button {
-    text-align: center;
-    background-color: #666;
-    border: none;
-    padding-left: 10px;
-    padding-right: 10px;
-    height: 40px;
-    border-radius: 10px;
-    color: white;
-    font-size: 22px;
-    cursor: pointer;
-    margin: 5px;
+.navbar a {
+    text-decoration: none;
+    color: black;
+    position: relative;
+    padding-bottom: 10px;
 }
+
+a:before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    width: 0%;
+    height: 2px;
+    background-color: black;
+    transition: width 0.25s ease-out;
+    transform: translateX(-50%);
+}
+
+ a:hover:before {
+    width: 100%;
+    left: 0;
+    transform: translateX(0%);
+}
+
