@@ -354,14 +354,43 @@ a:before {
 
 .product-grid {
     display: grid;
-    grid-template-columns: repeat (4, 1fr); /* 4 items in a row */ 
+    grid-template-columns: repeat(4, 1fr); /* 3 items in a row */
     grid-gap: 20px;
-    padding: 20px;
+    grid-auto-rows: minmax(100px, auto); /* min height, and allow for growth */
+    max-width: 1200px;
+    margin: -100px auto 0;
 }
 
 .product-item {
-    border: 1px solid #fffefe;
+    border: 1px solid #FFFEFE;
     padding: 10px;
     text-align: center;
     font-family: 'MrGeorge', sans-serif;
+    background: #FFFFFF;
+    border-radius: 10px;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+    font-size: 55px; 
+    margin-right: 10px;
+    padding-top: 100px;
 }
+
+.product-item img {
+    border-radius: 10px;
+
+    margin-bottom: 10px; /* space between image and text below */
+}
+
+.product-name-price .product-name {
+    font-size: 24px;
+}
+
+.product-name-price .product-price {
+    font-size: 24px;
+}
+
+.product-price:hover {
+    
+}
+
+
+

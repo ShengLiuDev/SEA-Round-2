@@ -1,4 +1,4 @@
-/**
+/*
  * Data Catalog Project Starter Code - SEA Stage 2
  *
  * This file is where you should be doing most of your work. You should
@@ -95,6 +95,8 @@ const meats = groceryItems.filter(item => item.category === "Meat");
 // const pork = meats.filter(item => item.type === "Pork");
 // const beef = meats.filter(item => item.type === "Beef");
 const seafood = groceryItems.filter(item => item.category === "Seafood");
+const sortedByPrice = sortByLowestToHighestPrice(groceryItems);
+const sortedByName = sortByAlphabeticalOrder(groceryItems);
 
 // slice documentation (just in case we need later) 
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/slice
@@ -114,9 +116,6 @@ function sortByLowestToHighestPrice(items) {
 function sortByAlphabeticalOrder(items) {
     return items.slice().sort((a, b) => a.name.localeCompare(b.name));
 }
-
-const sortedByPrice = sortByLowestToHighestPrice(groceryItems);
-const sortedByName = sortByAlphabeticalOrder(groceryItems);
 
 function scrollToTop() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -185,6 +184,8 @@ document.addEventListener('DOMContentLoaded', function() {
     function displayItems(items) {
         const productsContainer = document.getElementById('productsContainer');
         productsContainer.innerHTML = ''; // Clear the container
+        const gridContainer = document.createElement('div');
+        gridContainer.className = 'product-grid';
 
         // adds each individual element to the container
         // refer to w3 school example
@@ -198,12 +199,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
             itemElement.innerHTML = `
                 <img src="${imagePath}" alt="${item.name}">
-                <h4>${item.name}</h4>
-                
-                <p>$${item.price.toFixed(2)}${pricePerPound}</p>
+                <div class="product-name-price">
+                    <h4 class="product-name">${item.name}</h4>
+                    <p class="product-price">$${item.price.toFixed(2)}${pricePerPound}</p>
+                </div>
             `; // <p>Category: ${item.category}</p> ${pricePerUnit}
-            productsContainer.appendChild(itemElement);
+            gridContainer.appendChild(itemElement);
         });
+        productsContainer.appendChild(gridContainer);
     }
 
     // first apply the the filters and sort to display all items 
