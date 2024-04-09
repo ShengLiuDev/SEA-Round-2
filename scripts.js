@@ -87,7 +87,7 @@ const groceryItems = [
     
 ]
 
-// filter functions
+// filters
 const fruits = groceryItems.filter(item => item.category === "Fruits")
 const vegetables = groceryItems.filter(item => item.category === "Vegetables");
 const meats = groceryItems.filter(item => item.category === "Meat");
@@ -96,9 +96,9 @@ const pork = meats.filter(item => item.type === "Pork");
 const beef = meats.filter(item => item.type === "Beef");
 const seafood = groceryItems.filter(item => item.category === "Seafood");
 
-// slice is used here to create a shallow copy of the array 
+// slice documentation (just in case we need later) 
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/slice
-// read over documentation for other function as well 
+
 function sortByLowestToHighestPrice(items) {
     return items.slice().sort((a, b) => a.price - b.price);
 }
@@ -114,13 +114,85 @@ function scrollToTop() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
+// timing and changing of images 
 document.addEventListener('DOMContentLoaded', function() {
     let image = document.getElementById('img');
-    let images = ['images/farmer.jpg', 'images/farmer2.jpg', 'images/homecook.jpg', 'images/farmer3.jpg', 'images/farmer4.jpg', 'images/homecook2.jpg']
+    let images = ['images/farmer.jpg', 'images/farmer2.jpg', 'images/homecook.jpg', 
+    'images/farmer3.jpg', 'images/farmer4.jpg', 'images/homecook2.jpg']
     let index = 0;
     setInterval(function(){
-        index = (index + 1) % images.length;
+        index = (index + 1) % images.length; // iterate through every indice 
         image.src = images[index];
     }, 3000); 
-}
-)
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    const filterCheckboxes = document.querySelectorAll('.filter input[type="checkbox"]');
+    const sortSelect = document.getElementById('sortOptions');
+    const productsContainer = document.getElementById('productsContainer');
+
+    // event listener for filter checks 
+    filterCheckboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', function() {
+            applyFiltersAndSort();
+        });
+    });
+
+    // event checker for sort selection
+    sortSelect.addEventListener('change', function() {
+        applyFiltersAndSort();
+    });
+
+    function applyFiltersAndSort() {
+        // get checked categories 
+        const selectedCategories = Array.from(filterCheckboxes)
+            .filter(checkbox => checkbox.checked)
+            .map(checkbox => checkbox.value);
+
+        // filter by category 
+        let filteredItems = groceryItems.filter(item =>
+            selectedCategories.length === 0 || selectedCategories.includes(item.category)
+        );
+
+        // https://stackoverflow.com/questions/6712034/sort-array-by-firstname-alphabetically-in-javascript
+        switch (sortSelect.value) {
+            case 'price-ascending':
+                filteredItems.sort((a, b) => a.price - b.price);
+                break;
+            case 'price-descending':
+                filteredItems.sort((a, b) => b.price - a.price);
+                break;
+            case 'name-ascending':
+                filteredItems.sort((a, b) => a.name.localeCompare(b.name));
+                break;
+            case 'name-descending':
+                filteredItems.sort((a, b) => b.name.localeCompare(a.name));
+                break;
+        }
+
+        // display filtered and sorted items 
+        displayItems(filteredItems);
+    }
+
+    function displayItems(items) {
+        productsContainer.innerHTML = ''; // Clear the container
+
+        // adds each individual element to the container
+        // refer to w3 school example
+        items.forEach(item => {
+            const itemElement = document.createElement('div');
+            itemElement.className = 'product-item';
+            itemElement.innerHTML = `
+                <h4>${item.name}</h4>
+                <p>Category: ${item.category}</p>
+                <p>Price: $${item.price.toFixed(2)}</p>
+            `;
+            productsContainer.appendChild(itemElement);
+        });
+    }
+
+    // first apply the the filters and sort to display all items 
+    applyFiltersAndSort();
+});
+
+

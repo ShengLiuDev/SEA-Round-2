@@ -46,18 +46,68 @@
         <!-- https://www.youtube.com/watch?v=rD2Tnc-W31A --> 
         <div class="about-text">
             At SEA Market we pride ourselves on fresh, never frozen, organic groceries for 
-            those who are not able to access them locally! We support our local farmers 
-            and love getting to know our community and how they use our ingredients
+            those who are not able to access them locally. We support our local farmers, 
+            love getting to know our community, and hearing how they use our ingredients.
         </div>
     </div>
     <div class="products-header">
         Products
         <hr>
         <div class="filter">
+            <h3>Filters</h3>
+            <div class="filter-categories">
+                <label class="custom-checkbox">
+                    <input type="checkbox" name="category" value="Vegetables"> 
+                    <span class="checkbox"></span> Vegetables
+                </label>
+                <br>
+                <label class="custom-checkbox">
+                    <input type="checkbox" name="category" value="Fruit">
+                    <span class="checkbox"></span> Fruit
+                </label>
+                <br>
+                <label class="custom-checkbox">
+                    <input type="checkbox" name="category" value="Meat"> 
+                    <span class="checkbox"></span> Meat
+                </label>
+                <br>
+                <label class="custom-checkbox">
+                    <input type="checkbox" name="category" value="Seafood"> 
+                    <span class="checkbox"></span> Seafood
+                </label>
+                <br>
+                <label class="custom-checkbox">
+                    <input type="checkbox" name="category" value="Chicken"> 
+                    <span class="checkbox"></span> Chicken
+                </label>
+                <br>
+                <label class="custom-checkbox">
+                    <input type="checkbox" name="category" value="Beef"> 
+                    <span class="checkbox"></span> Beef
+                </label>
+                <br>
+                <label class="custom-checkbox">
+                    <input type="checkbox" name="category" value="Pork"> 
+                    <span class="checkbox"></span> Pork
+                </label>
+            </div>
             
         </div>
         <div class="sort">
-                
+            <h3>Sort by:</h3>
+            <div class="sort-menu">
+                <select id="sortOptions">
+                    <option value="price-ascending">Price, Low to High</option>
+                    <option value="price-descending">Price, High to Low</option>
+                    <option value="name-ascending">Name, A to Z</option>
+                    <option value="name-descending">Name, Z to A</option>
+                </select>
+            </div>
+            
+        </div>
+
+        <div id="productsContainer">
+
         </div>
     </div>
     <script src="scripts.js"></script>
