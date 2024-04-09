@@ -75,7 +75,7 @@ const groceryItems = [
     { name: "Beef Short Ribs", category: "Meat", type: "Beef" , price: 7.99},
     
     { name: "Farmed Atlantic Salmon Fillet", category: "Seafood", price: 6.99},
-    { name: "Smoked Salmon", category: "Seafood", price: 6.00},
+    //{ name: "Smoked Salmon", category: "Seafood", price: 6.00},
     { name: "Peeled Jumbo Shrimp", category: "Seafood", price: 14.99},
     { name: "Tilapia", category: "Seafood", price: 7.99},
     { name: "Colossal Shrimp", category: "Seafood", price: 10.99},
@@ -91,13 +91,21 @@ const groceryItems = [
 const fruits = groceryItems.filter(item => item.category === "Fruits")
 const vegetables = groceryItems.filter(item => item.category === "Vegetables");
 const meats = groceryItems.filter(item => item.category === "Meat");
-const chicken = meats.filter(item => item.type === "Chicken");
-const pork = meats.filter(item => item.type === "Pork");
-const beef = meats.filter(item => item.type === "Beef");
+// const chicken = meats.filter(item => item.type === "Chicken");
+// const pork = meats.filter(item => item.type === "Pork");
+// const beef = meats.filter(item => item.type === "Beef");
 const seafood = groceryItems.filter(item => item.category === "Seafood");
 
 // slice documentation (just in case we need later) 
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/slice
+
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const temp = Math.floor(Math.random() * (i + 1)); // random indice;
+        [array[i], array[temp]] = [array[temp], array[i]];
+    }
+    return array;
+}
 
 function sortByLowestToHighestPrice(items) {
     return items.slice().sort((a, b) => a.price - b.price);
@@ -175,6 +183,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function displayItems(items) {
+        const productsContainer = document.getElementById('productsContainer');
         productsContainer.innerHTML = ''; // Clear the container
 
         // adds each individual element to the container
@@ -182,11 +191,17 @@ document.addEventListener('DOMContentLoaded', function() {
         items.forEach(item => {
             const itemElement = document.createElement('div');
             itemElement.className = 'product-item';
+            const imageFileName = item.name.toLowerCase().replace(/ /g, '-') + '.png';
+            const imagePath = `ingredient-images/${imageFileName}`;
+
+            const pricePerPound = (item.category === 'Meat' || item.category === 'Seafood') ? '/lb' : '';
+
             itemElement.innerHTML = `
+                <img src="${imagePath}" alt="${item.name}">
                 <h4>${item.name}</h4>
-                <p>Category: ${item.category}</p>
-                <p>Price: $${item.price.toFixed(2)}</p>
-            `;
+                
+                <p>$${item.price.toFixed(2)}${pricePerPound}</p>
+            `; // <p>Category: ${item.category}</p> ${pricePerUnit}
             productsContainer.appendChild(itemElement);
         });
     }
