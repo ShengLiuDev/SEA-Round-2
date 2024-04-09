@@ -57,52 +57,66 @@ const groceryItems = [
     { name: "Bag of Gold Potatoes", category: "Vegetables", price: 3.99},
     { name: "Zucchini", category: "Vegetables", price: 3.69},
 
-    { name: "Chicken Breast", category: "Meat", price: 4.99},
-    { name: "Strawberries", category: "Meat", price: 4.99},
-    { name: "Strawberries", category: "Meat", price: 4.99},
-    { name: "Strawberries", category: "Meat", price: 4.99},
-    { name: "Strawberries", category: "Meat", price: 4.99},
-    { name: "Strawberries", category: "Meat", price: 4.99},
-    { name: "Strawberries", category: "Meat", price: 4.99},
-    { name: "Strawberries", category: "Meat", price: 4.99},
-    { name: "Strawberries", category: "Meat", price: 4.99},
-    { name: "Strawberries", category: "Meat", price: 4.99},
-    { name: "Strawberries", category: "Meat", price: 4.99},
-    { name: "Strawberries", category: "Meat", price: 4.99},
-    { name: "Strawberries", category: "Meat", price: 4.99},
-    { name: "Strawberries", category: "Meat", price: 4.99},
-    { name: "Strawberries", category: "Meat", price: 4.99},
-    { name: "Strawberries", category: "Meat", price: 4.99},
+    { name: "Chicken Breast", category: "Meat", type: "Chicken" ,price: 10.99},
+    { name: "Chicken Tenderloins", category: "Meat", type: "Chicken" , price: 7.99},
+    { name: "Whole Chicken", category: "Meat", type: "Chicken" , price: 3.29},
+    { name: "Chicken Drumsticks", category: "Meat", type: "Chicken" ,price: 1.99},
+    { name: "Skin-On Chicken Thighs", category: "Meat", type: "Chicken" ,price: 1.99},
+    { name: "Chicken Wings", category: "Meat", type: "Chicken" ,price: 2.99},
+    { name: "Pork Loin Chops", category: "Meat", type: "Pork" ,price: 4.99},
+    { name: "Pork Boston Butt Roast", category: "Meat", type: "Pork" ,price: 3.29},
+    { name: "Pork Shoulder Ribs", category: "Meat", type: "Pork" ,price: 3.79},
+    { name: "Pork Ribs", category: "Meat", type: "Pork" ,price: 2.99},
+    { name: "Pork Belly", category: "Meat", type: "Pork" ,price: 4.99},
+    { name: "Standing Beef Rib Roast", category: "Meat", type: "Beef" ,price: 14.99},
+    { name: "Beef Stew Meat", category: "Meat", type: "Beef" , price: 6.99},
+    { name: "Ground Beef", category: "Meat", type: "Beef" , price: 6.49},
+    { name: "Beef Oxtails", category: "Meat", type: "Beef" , price: 8.99},
+    { name: "Beef Short Ribs", category: "Meat", type: "Beef" , price: 7.99},
     
-    { name: "Strawberries", category: "Fruits", price: 4.99},
-    { name: "Strawberries", category: "Fruits", price: 4.99},
-    { name: "Strawberries", category: "Fruits", price: 4.99},
-    { name: "Strawberries", category: "Fruits", price: 4.99},
-    { name: "Strawberries", category: "Fruits", price: 4.99},
-    { name: "Strawberries", category: "Fruits", price: 4.99},
-    { name: "Strawberries", category: "Fruits", price: 4.99},
-    { name: "Strawberries", category: "Fruits", price: 4.99},
-    { name: "Strawberries", category: "Fruits", price: 4.99},
-    { name: "Strawberries", category: "Fruits", price: 4.99},
-    { name: "Strawberries", category: "Fruits", price: 4.99},
-    { name: "Strawberries", category: "Fruits", price: 4.99},
-    { name: "Strawberries", category: "Fruits", price: 4.99},
-    { name: "Strawberries", category: "Fruits", price: 4.99},
-    { name: "Strawberries", category: "Fruits", price: 4.99},
-    { name: "Strawberries", category: "Fruits", price: 4.99},
-    
-
+    { name: "Farmed Atlantic Salmon Fillet", category: "Seafood", price: 6.99},
+    { name: "Smoked Salmon", category: "Seafood", price: 6.00},
+    { name: "Peeled Jumbo Shrimp", category: "Seafood", price: 14.99},
+    { name: "Tilapia", category: "Seafood", price: 7.99},
+    { name: "Colossal Shrimp", category: "Seafood", price: 10.99},
+    { name: "Catfish Fillets", category: "Seafood", price: 9.99},
+    { name: "Lobster Tails", category: "Seafood", price: 20.99},
+    { name: "Cod Fillets", category: "Seafood", price: 17.99},
+    { name: "Sea Scallops", category: "Seafood", price: 26.99},
+    { name: "Whole Lobster", category: "Seafood", price: 28.99},
     
 ]
 
+// filter functions
+const fruits = groceryItems.filter(item => item.category === "Fruits")
+const vegetables = groceryItems.filter(item => item.category === "Vegetables");
+const meats = groceryItems.filter(item => item.category === "Meat");
+const chicken = meats.filter(item => item.type === "Chicken");
+const pork = meats.filter(item => item.type === "Pork");
+const beef = meats.filter(item => item.type === "Beef");
+const seafood = groceryItems.filter(item => item.category === "Seafood");
+
+// slice is used here to create a shallow copy of the array 
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/slice
+// read over documentation for other function as well 
+function sortByLowestToHighestPrice(items) {
+    return items.slice().sort((a, b) => a.price - b.price);
+}
+
+function sortByAlphabeticalOrder(items) {
+    return items.slice().sort((a, b) => a.name.localeCompare(b.name));
+}
+
+const sortedByPrice = sortByLowestToHighestPrice(groceryItems);
+const sortedByName = sortByAlphabeticalOrder(groceryItems);
 
 function scrollToTop() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-    let image = document.getElementById('Farmer');
-    let images = ['images/farmer.jpg', 'images/farmer2.jpg', 'images/farmer3.jpg', 'images/farmer4.jpg']
+    let image = document.getElementById('img');
+    let images = ['images/farmer.jpg', 'images/farmer2.jpg', 'images/homecook.jpg', 'images/farmer3.jpg', 'images/farmer4.jpg', 'images/homecook2.jpg']
     let index = 0;
     setInterval(function(){
         index = (index + 1) % images.length;

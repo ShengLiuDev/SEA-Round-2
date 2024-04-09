@@ -229,3 +229,15 @@ a:before {
     position: relative;
     margin-top: 110px;
 }
+
+.products-header {
+    font-family: arista-bold;
+    font-size: 70px;
+    color: white;
+    margin-inline: 100px;
+    display: block;
+    text-align: center;
+    margin-top: 75px;
+    padding: 50px; 
+    background: darkgreen;
+}
