@@ -13,22 +13,25 @@ align items is vertical
 @font-face {
     font-family: arista-light;
     src: url('/font/Arista-Pro-Light-trial.ttf');
+}
 
+@font-face {
+    font-family: arista-bold;
+    src: url('/font/Arista-Pro-Bold-trial.ttf')
 }
 
 /* https://htmlcolorcodes.com/colors/dark-green/ */
 .main-header {
-    background-color: #FFFC00;
+    background-color: white;
     padding-bottom: 10px;
     align-items: center;
     display: flex;
     flex-direction: column;
-    box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.08), 0 10px 10px 0 rgba(0, 0, 0, 0.12);
-    padding-bottom: 1200px;
+    box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.08), 0 10px 10px 0 rgba(0, 0, 0, 0.12);    
     top: 0;
     left: 0;
     width: 100%;
-    z-index: 1000;
+    z-index: 4;
     position: fixed; /* this makes the header follow us  */
     /* https://stackoverflow.com/questions/63405967/how-do-you-add-a-shadow-underneath-a-header-that-is-gray-and-blurry-in-css */
 }
@@ -37,11 +40,11 @@ align items is vertical
     background: none;
     border: none;
     color: inherit;
-    font-family: inherit;
+    font-family: arista-bold;
     margin: 0;
     cursor: pointer;
     outline: none;
-    font-size: 70px;
+    font-size: 95px;
     text-decoration: none;
     text-align: center;
     justify-content: center;
@@ -95,9 +98,9 @@ align items is vertical
     width: 100%;
     font-family: arista-light;
     text-decoration: none;
-    font-size: 25px;
+    font-size: 30px;
     display: flex;
-    gap: 100px;
+    gap: 200px;
     align-items: center;
     justify-content: center;
     color: black;
@@ -130,3 +133,99 @@ a:before {
     transform: translateX(0%);
 }
 
+.banner {
+    width: 100%;
+    position: relative;
+    margin-top: 150px;
+    z-index: 1;
+}
+
+.table-banner {
+    width: 100%;
+    height: auto;
+    display: block;
+    opacity: 0.9;
+}
+
+.banner-text {
+    position: absolute;
+    font-family: arista-light;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 60px;
+    z-index: 2;
+    text-align: center;
+    font-weight: bold
+}
+
+.highlight {
+    color: yellowgreen;
+    display: inline;
+    position: relative;
+}
+
+.highlight:before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background-color: white;
+    bottom: 0;
+    left: 0;
+    transform: scaleX(0);
+    transform-origin: bottom left;
+    transition: transform 0.25s ease-out;
+    
+}
+
+.highlight:hover:before {
+    transform: scaleX(1);
+}
+
+.about-us {
+    font-family: arista-bold;
+    font-size: 70px;
+    color: darkgreen;
+    margin-inline: 100px;
+    display: block;
+    text-align: center;
+    margin-top: 75px;
+}
+
+.about-picture {
+    margin-top: 100px;
+    margin-left: 100px;
+    width: 30%;
+    max-height: 400px;
+    object-fit: cover;
+    display: block;
+    /* https://stackoverflow.com/questions/3186688/drop-shadow-for-png-image-in-css */
+    -webkit-filter: drop-shadow(5px 5px 5px #222);
+    filter: drop-shadow(5px 5px 5px #222);
+    border-radius: 2em;
+}
+
+.about-subsection {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 50px;
+    padding-bottom: 200px;
+}
+
+.about-text {
+    margin-left: 100px;
+    font-family: arista-light;
+    font-size: 30px;
+    text-align: left;
+    line-height: 1.4;
+    background: white;
+    padding: 20px;
+    border-radius: 1em;
+    max-width: 600px;
+    width: 100%;
+    position: relative;
+    margin-top: 110px;
+}

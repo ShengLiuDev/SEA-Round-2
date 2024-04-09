@@ -22,9 +22,91 @@
  *    with the string you added to the array, but a broken image.
  * 
  */
+const groceryItems = [
+    { name: "Mango", category: "Fruits", price: 1.69},
+    { name: "Limes", category: "Fruits", price: 0.49},
+    { name: "Coconut", category: "Fruits", price: 2.79},
+    { name: "Mandarins", category: "Fruits", price: 5.99},
+    { name: "Strawberries", category: "Fruits", price: 4.99},
+    { name: "Pineapple Chunks", category: "Fruits", price: 3.99},
+    { name: "White Seedless Grapes", category: "Fruits", price: 8.99},
+    { name: "Small Watermelon Chunks", category: "Fruits", price: 4.99},
+    { name: "Prepared Strawberries", category: "Fruits", price: 4.99},
+    { name: "Tomatoes on the Vine", category: "Fruits", price: 2.49},
+    { name: "Honeycrisp Apples", category: "Fruits", price: 5.29},
+    { name: "Ambrosia Apples", category: "Fruits", price: 5.99},
+    { name: "Red Raspberries", category: "Fruits", price: 5.99},
+    { name: "Bartlett Pears", category: "Fruits", price: 1.99},
+    { name: "Naval Oranges", category: "Fruits", price: 1.49},
+    { name: "Fuji Apples", category: "Fruits", price: 2.19},
+
+    { name: "Basil", category: "Vegetables", price: 2.79},
+    { name: "Broccoli", category: "Vegetables", price: 2.19},
+    { name: "Asparagus", category: "Vegetables", price: 2.99},
+    { name: "Spring Mix", category: "Vegetables", price: 4.99},
+    { name: "Green Beans", category: "Vegetables", price: 2.50},
+    { name: "Baby Spinach", category: "Vegetables", price: 3.99},
+    { name: "Yellow Onion", category: "Vegetables", price: 1.19},
+    { name: "Sweet Potatoes", category: "Vegetables", price: 2.49},
+    { name: "Red Bell Peppers", category: "Vegetables", price: 3.69},
+    { name: "Iceberg Lettuce", category: "Vegetables", price: 6.49},
+    { name: "Sliced Baby Bella Mushrooms", category: "Vegetables", price: 2.00},
+    { name: "White Whole Mushrooms", category: "Vegetables", price: 2.00},
+    { name: "Eggplant", category: "Vegetables", price: 2.99},
+    { name: "Romaine Lettuce", category: "Vegetables", price: 3.99},
+    { name: "Bag of Gold Potatoes", category: "Vegetables", price: 3.99},
+    { name: "Zucchini", category: "Vegetables", price: 3.69},
+
+    { name: "Chicken Breast", category: "Meat", price: 4.99},
+    { name: "Strawberries", category: "Meat", price: 4.99},
+    { name: "Strawberries", category: "Meat", price: 4.99},
+    { name: "Strawberries", category: "Meat", price: 4.99},
+    { name: "Strawberries", category: "Meat", price: 4.99},
+    { name: "Strawberries", category: "Meat", price: 4.99},
+    { name: "Strawberries", category: "Meat", price: 4.99},
+    { name: "Strawberries", category: "Meat", price: 4.99},
+    { name: "Strawberries", category: "Meat", price: 4.99},
+    { name: "Strawberries", category: "Meat", price: 4.99},
+    { name: "Strawberries", category: "Meat", price: 4.99},
+    { name: "Strawberries", category: "Meat", price: 4.99},
+    { name: "Strawberries", category: "Meat", price: 4.99},
+    { name: "Strawberries", category: "Meat", price: 4.99},
+    { name: "Strawberries", category: "Meat", price: 4.99},
+    { name: "Strawberries", category: "Meat", price: 4.99},
+    
+    { name: "Strawberries", category: "Fruits", price: 4.99},
+    { name: "Strawberries", category: "Fruits", price: 4.99},
+    { name: "Strawberries", category: "Fruits", price: 4.99},
+    { name: "Strawberries", category: "Fruits", price: 4.99},
+    { name: "Strawberries", category: "Fruits", price: 4.99},
+    { name: "Strawberries", category: "Fruits", price: 4.99},
+    { name: "Strawberries", category: "Fruits", price: 4.99},
+    { name: "Strawberries", category: "Fruits", price: 4.99},
+    { name: "Strawberries", category: "Fruits", price: 4.99},
+    { name: "Strawberries", category: "Fruits", price: 4.99},
+    { name: "Strawberries", category: "Fruits", price: 4.99},
+    { name: "Strawberries", category: "Fruits", price: 4.99},
+    { name: "Strawberries", category: "Fruits", price: 4.99},
+    { name: "Strawberries", category: "Fruits", price: 4.99},
+    { name: "Strawberries", category: "Fruits", price: 4.99},
+    { name: "Strawberries", category: "Fruits", price: 4.99},
+    
+
+    
+]
+
 
 function scrollToTop() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-
+document.addEventListener('DOMContentLoaded', function() {
+    let image = document.getElementById('Farmer');
+    let images = ['images/farmer.jpg', 'images/farmer2.jpg', 'images/farmer3.jpg', 'images/farmer4.jpg']
+    let index = 0;
+    setInterval(function(){
+        index = (index + 1) % images.length;
+        image.src = images[index];
+    }, 3000); 
+}
+)
