@@ -514,7 +514,7 @@ a:before {
 
 .product-item img {
     border-radius: 10px;
-    width: 100%;
+    width: auto;
     height: auto;
     margin-bottom: 10px; /* space between image and text below */
 }
