@@ -86,6 +86,7 @@ const groceryItems = [
     { name: "Whole Lobster", category: "Seafood", price: 28.99},
     
 ]
+const itemCart = [];
 
 // filters
 const fruits = groceryItems.filter(item => item.category === "Fruits")
@@ -186,32 +187,125 @@ document.addEventListener('DOMContentLoaded', function() {
         productsContainer.innerHTML = ''; // Clear the container
         const gridContainer = document.createElement('div');
         gridContainer.className = 'product-grid';
-
-        // adds each individual element to the container
-        // refer to w3 school example
+    
         items.forEach(item => {
             const itemElement = document.createElement('div');
             itemElement.className = 'product-item';
             const imageFileName = item.name.toLowerCase().replace(/ /g, '-') + '.png';
             const imagePath = `ingredient-images/${imageFileName}`;
-
             const pricePerPound = (item.category === 'Meat' || item.category === 'Seafood') ? '/lb' : '';
-
+    
             itemElement.innerHTML = `
                 <img src="${imagePath}" alt="${item.name}">
                 <div class="product-name-price">
                     <h4 class="product-name">${item.name}</h4>
                     <p class="product-price">$${item.price.toFixed(2)}${pricePerPound}</p>
                 </div>
-                <button class="add-to-cart-btn">Add to Cart</button>
-            `; // <p>Category: ${item.category}</p> ${pricePerUnit}
+            `;
+    
+            // Create 'Add to Cart' button
+            const addButton = document.createElement('button');
+            addButton.textContent = 'Add to Cart';
+            addButton.classList.add('add-to-cart-btn');
+            addButton.onclick = function() { 
+                addToCart(item);
+                calculateTotalCostOfCart(item);
+            };
+            
+            
+            itemElement.appendChild(addButton);
             gridContainer.appendChild(itemElement);
         });
+    
         productsContainer.appendChild(gridContainer);
     }
+    
+    function addToCart(item) {
+        // Check if the item is already in the cart
+        if (itemCart.hasOwnProperty(item.name)) {
+            // Increase the quantity of the item
+            itemCart[item.name].quantity++;
+        } else {
+            // Add the new item to the cart with quantity 1
+            itemCart[item.name] = {...item, quantity: 1};
+        }
+        updateCart();
+        console.log("Cart updated with items:", itemCart);
+    }
+    
+    function removeFromCart(itemName) {
+        // Decrease the quantity or remove the item from the cart
+        if (itemCart[itemName].quantity > 1) {
+            itemCart[itemName].quantity--;
+        } else {
+            delete itemCart[itemName];
+        }
+        updateCart();
+    }
+    
+    function updateCart() {
+        const cartItemsContainer = document.querySelector('.cart-items');
+        cartItemsContainer.innerHTML = ''; 
+    
+        // iterate over to create new items 
+        for (const [itemName, itemDetails] of Object.entries(itemCart)) {
+            const itemElement = document.createElement('div');
+            itemElement.className = 'cart-item';
+            let itemTotalPrice = (itemDetails.price * itemDetails.quantity).toFixed(2);
 
+            itemElement.innerHTML = `${itemDetails.quantity}x ${itemName}: $${itemTotalPrice}`;
+            if (itemDetails.category === 'Meat' || itemDetails.category === 'Seafood') {
+                
+                const weightInput = document.createElement('input');
+                weightInput.type = 'number';
+                weightInput.value = itemDetails.weight || 1; // set the default to 1 or just the current weight (edge case)
+                weightInput.min = 0.1;
+                weightInput.step = 0.1;
+                weightInput.addEventListener('change', (e) => {
+                    itemDetails.weight = e.target.value;
+                    itemDetails.price = calculatePricePerPound(itemDetails.basePrice, itemDetails.weight);
+                    updateCart();
+                });
+                itemElement.appendChild(weightInput);
+                itemTotalPrice = (itemDetails.basePrice * itemDetails.weight).toFixed(2);
+            }
+            // append to cartItems 
+            cartItemsContainer.appendChild(itemElement);
+        }
+        // update total of cart
+        document.getElementById('cartTotal').textContent = calculateTotalCostOfCart();
+    }
+    
+    // for seafood and meat 
+    function calculatePricePerPound(basePrice, weight) {
+        return basePrice * weight;
+    }
+    
+    function calculateTotalCostOfCart() {
+        let totalCost = 0;
+        for (const itemDetails of Object.values(itemCart)) {
+            totalCost += itemDetails.price * (itemDetails.weight || 1);
+        }
+        return totalCost.toFixed(2); // Returns the total cost of items in the cart
+    }
+
+    
     // first apply the the filters and sort to display all items 
     applyFiltersAndSort();
 });
+
+function showCart() {
+    console.log("OPENING THE CART::::::::::::::");
+    document.getElementById('cartSidebar').classList.add('active');
+    updateCart();
+}
+
+function closeCart() {
+    console.log("CLOSING THE CART::::::::::::::");
+    document.getElementById('cartSidebar').classList.remove('active');
+}
+
+
+
 
 

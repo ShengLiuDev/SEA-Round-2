@@ -10,6 +10,10 @@ align items is vertical
 
 */
 
+html {
+    scroll-behavior: smooth;
+}
+
 @font-face {
     font-family: arista-light;
     src: url('/font/Arista-Pro-Light-trial.ttf');
@@ -74,12 +78,53 @@ align items is vertical
     align-items: center;
 }
 
-.header-icons {
+.header-icons .shopping-cart-icon {
+    size: 150%;
     display: flex;
     justify-content: flex-end;
     align-items: center;
     padding-right: 30px;
     gap: 20px;
+}
+
+.header-icons button {
+    border: none;
+    background: none;
+    padding: 0;
+    cursor: pointer;
+}
+
+/* TEMPORARY HOLDER FOR SHOPPING CART ADD ON LATER ON SHOPPINGCART SHOPPING CART SHOPPING-CART */
+.cart-sidebar {
+    position: fixed;
+    right: -400px;
+    top: 0;
+    width: 400px;
+    height: 100%;
+    background-color: #FFF;
+    box-shadow: -2px 0 5px rgba(0,0,0,0.5);
+    transition: right 0.3s ease-in-out;
+    z-index: 100; /* make sure its on top of everything else */
+}
+
+.cart-sidebar.active {
+    right: 0;
+}
+
+.cart-items, .cart-summary {
+    padding: 20px;
+}
+
+.cart-summary {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+.cart-items {
+    font-family: "MrGeorge", sans-serif;
+    font-size: 20px;
+    text-align: left;
 }
 
 .logo-icon {
@@ -138,6 +183,7 @@ a:before {
     position: relative;
     margin-top: 150px;
     z-index: 1;
+    
 }
 
 .table-banner {
@@ -145,6 +191,7 @@ a:before {
     height: auto;
     display: block;
     opacity: 0.9;
+    
 }
 
 .banner-text {
@@ -158,6 +205,11 @@ a:before {
     z-index: 2;
     text-align: center;
     font-weight: bold
+    
+}
+
+#home {
+    scroll-margin-top: 200px;
 }
 
 .highlight {
@@ -182,6 +234,10 @@ a:before {
 
 .highlight:hover:before {
     transform: scaleX(1);
+}
+
+#about {
+    scroll-margin-top: 260px;
 }
 
 .about-us {
@@ -213,6 +269,7 @@ a:before {
     justify-content: center;
     padding-top: 50px;
     padding-bottom: 200px;
+    margin-bottom: 210px;
 }
 
 .about-text {
@@ -228,6 +285,10 @@ a:before {
     width: 100%;
     position: relative;
     margin-top: 110px;
+}
+
+#products {
+    scroll-margin-top: 185px;
 }
 
 .products-header {

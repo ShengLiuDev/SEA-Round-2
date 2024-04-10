@@ -9,6 +9,7 @@
 </head>
 <body>
     <header class="main-header">
+        <script src="scripts.js"></script>
         <div class="top-header">
             <div class="spacer"></div>
             <div class="title-wrapper">
@@ -17,8 +18,9 @@
                 <img src="images/mushroom.png" alt="Logo" class="logo-icon" />
             </div>
             <div class="header-icons">
-                <img src="images/black-user.svg" alt="User Profile" class="header-icon" />
-                <img src="images/black-shopping-cart.svg" alt="Shopping Cart" class="header-icon" />
+                <button onclick="showCart()" class="header-icon">
+                    <img src="images/black-shopping-cart.svg" alt="Shopping Cart" class="shopping-cart-icon" />
+                </button>
             </div>
         </div>
         <nav class="navbar">
@@ -29,80 +31,96 @@
         </nav>
     </header>
 
-    <div class="banner">
-        <img src="images/header-banner.png" alt="Table of Vegetables" class="table-banner" />
-        <div class="banner-text"> 
-            Welcome To Your Online Marketplace For
-            <br>
-            <span class="highlight">Fresh</span> and <span class="highlight">Organic</span> Produce
+    <div id="cartSidebar" class="cart-sidebar">
+        <div class="cart-items"></div>
+        <div class="cart-summary">
+            <p>Total: $<span id="cartTotal">0.00</span></p>
+            <button onclick="closeCart()" class="close-cart-btn">Close CARTTTTTTT</button>
         </div>
     </div>
-    <div class="about-us">
-        About Our Farmers And Us
-        <hr>
-    </div>
-    <div class="about-subsection">
-        <img src="" id="img" class="about-picture"/>
-        <!-- https://www.youtube.com/watch?v=rD2Tnc-W31A --> 
-        <div class="about-text">
-            At SEA Market we pride ourselves on fresh, never frozen, organic groceries for 
-            those who are not able to access them locally. We support our local farmers, 
-            love getting to know our community, and hearing how they use our ingredients.
-        </div>
-    </div>
-    <div class="products-header">
-        Our Products
-        <hr>
-        <div class="filter">
-            <h3>Filters</h3>
-            <div class="filter-categories">
-                <label class="custom-checkbox">
-                    <input type="checkbox" name="category" value="Vegetables"> 
-                    <span class="checkbox"></span> Vegetables
-                </label>
+
+    <section id="home">
+        <div class="banner">
+            <img src="images/header-banner.png" alt="Table of Vegetables" class="table-banner" />
+            <div class="banner-text"> 
+                Welcome To Your Online Marketplace For
                 <br>
-                <label class="custom-checkbox">
-                    <input type="checkbox" name="category" value="Fruits">
-                    <span class="checkbox"></span> Fruits
-                </label>
-                <br>
-                <label class="custom-checkbox">
-                    <input type="checkbox" name="category" value="Meat"> 
-                    <span class="checkbox"></span> Meat
-                </label>
-                <br>
-                <label class="custom-checkbox">
-                    <input type="checkbox" name="category" value="Seafood"> 
-                    <span class="checkbox"></span> Seafood
-                </label>
-                <br>
+                <span class="highlight">Fresh</span> and <span class="highlight">Organic</span> Produce
             </div>
+        </div>
+    </section>
+    <section id="about">
+        <div class="about-us">
+            About Our Farmers And Us
+            <hr>
+        </div>
+        <div class="about-subsection">
+            <img src="" id="img" class="about-picture"/>
+            <!-- https://www.youtube.com/watch?v=rD2Tnc-W31A --> 
+            <div class="about-text">
+                At SEA Market we pride ourselves on fresh, never frozen, organic groceries for 
+                those who are not able to access them locally. We support our local farmers, 
+                love getting to know our community, and hearing how they use our ingredients.
+            </div>
+        </div>
+    </section>
+    <section id="products">
+        <div class="products-header">
+            Our Products
             
-        </div>
-        <div class="sort">
-            <h3>Sort by: </h3>
-            <div class="sort-menu">
-                <select id="sortOptions">
-                    <option value="price-ascending">Price, Low to High</option>
-                    <option value="price-descending">Price, High to Low</option>
-                    <option value="name-ascending">Name, A to Z</option>
-                    <option value="name-descending">Name, Z to A</option>
-                </select>
+            <div class="filter">
+                <h3>Filters</h3>
+                <div class="filter-categories">
+                    <label class="custom-checkbox">
+                        <input type="checkbox" name="category" value="Vegetables"> 
+                        <span class="checkbox"></span> Vegetables
+                    </label>
+                    <br>
+                    <label class="custom-checkbox">
+                        <input type="checkbox" name="category" value="Fruits">
+                        <span class="checkbox"></span> Fruits
+                    </label>
+                    <br>
+                    <label class="custom-checkbox">
+                        <input type="checkbox" name="category" value="Meat"> 
+                        <span class="checkbox"></span> Meat
+                    </label>
+                    <br>
+                    <label class="custom-checkbox">
+                        <input type="checkbox" name="category" value="Seafood"> 
+                        <span class="checkbox"></span> Seafood
+                    </label>
+                    <br>
+                </div>
             </div>
-        </div>
-        <div id="productsContainer" class="product-grid">
-            <div class="product-container">
-                <div class="products">
-                    <img src="path-to-image" alt="Product Name">
-                    <div class="product-name-price">
-                        
-                        
+            <div class="sort">
+                <h3>Sort by: </h3>
+                <div class="sort-menu">
+                    <select id="sortOptions">
+                        <option value="price-ascending">Price, Low to High</option>
+                        <option value="price-descending">Price, High to Low</option>
+                        <option value="name-ascending">Name, A to Z</option>
+                        <option value="name-descending">Name, Z to A</option>
+                    </select>
+                </div>
+            </div>
+            <div id="productsContainer" class="product-grid">
+                <div class="product-container">
+                    <div class="products">
+                        <img src="path-to-image" alt="Product Name">
+                        <div class="product-name-price">
+                            
+                            
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <script src="scripts.js"></script>
+    </section>
+    <section id="contact-section">
+        
+    </section>
+    
 </body>
 
 </html>
