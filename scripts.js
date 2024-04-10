@@ -203,6 +203,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     <h4 class="product-name">${item.name}</h4>
                     <p class="product-price">$${item.price.toFixed(2)}${pricePerPound}</p>
                 </div>
+                <button class="add-to-cart-btn">Add to Cart</button>
             `; // <p>Category: ${item.category}</p> ${pricePerUnit}
             gridContainer.appendChild(itemElement);
         });
