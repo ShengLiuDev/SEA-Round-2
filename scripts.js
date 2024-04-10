@@ -258,7 +258,8 @@ function addToCart(item) {
 
 
 function removeFromCart(index) {
-    
+    itemCart.splice(index, 1); // remove item from itemCart
+    updateCart();
 }
 
 function calculatePricePerPound(basePrice, weight) {
@@ -308,9 +309,15 @@ function updateCart() {
             });
             itemElement.appendChild(weightInput);
         }
+        const removeButton = document.createElement('button');
+        removeButton.innerHTML = '<img src="images/trashcan.svg" alt="Remove" />';
+        removeButton.classList.add('remove-from-cart-btn');
+        removeButton.onclick = function() {
+            removeFromCart(index);
+        };
+        itemElement.appendChild(removeButton);
         cartItemsContainer.appendChild(itemElement);
     });
-    
     // update total cost 
     document.getElementById('cartTotal').textContent = calculateTotalCostOfCart();
 }

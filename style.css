@@ -183,6 +183,20 @@ html {
     font-style: bold;
 }
 
+.remove-from-cart-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+}
+
+.remove-from-cart-btn img {
+    width: 20px;
+    height: auto;
+    margin-left: 10px;
+    transform: translateY(3px);
+}
+
 .logo-icon {
     height: 90px;
     margin-right: 20px;
