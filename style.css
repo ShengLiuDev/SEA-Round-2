@@ -453,9 +453,11 @@ a:before {
 
 .sort {
     font-size: 30px;
-    text-align: left;
+    text-align: right;
     padding-left: 20px;
-    align-items: center;
+    position: relative;
+    margin-top: -250px;
+    margin-bottom: 150px;
 }
 
 .sort h3 {
@@ -472,7 +474,7 @@ a:before {
     appearance: none;
     background-color: #EEE;
     transition: background-color 0.2s, transform 0.2s;
-    margin-right: 70px;
+    
 }
 
 .sort-menu select:hover {
@@ -491,6 +493,15 @@ a:before {
     max-width: 1200px;
     margin: 0 auto;
     
+}
+
+@media (max-width: 768px) {
+    .product-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .product-item {
+        font-size: 20px;
+    }
 }
 
 .product-item {
@@ -512,7 +523,8 @@ a:before {
 
 
 .product-item img {
-    width: 100%;
+    width: 15vw;
+    max-width: 100%;
     height: auto;
     border-radius: 10px;
     margin-bottom: 10px; /* space between image and text below */
