@@ -219,77 +219,6 @@ document.addEventListener('DOMContentLoaded', function() {
     
         productsContainer.appendChild(gridContainer);
     }
-    
-    function addToCart(item) {
-        // Check if the item is already in the cart
-        if (itemCart.hasOwnProperty(item.name)) {
-            // Increase the quantity of the item
-            itemCart[item.name].quantity++;
-        } else {
-            // Add the new item to the cart with quantity 1
-            itemCart[item.name] = {...item, quantity: 1};
-        }
-        updateCart();
-        console.log("Cart updated with items:", itemCart);
-    }
-    
-    function removeFromCart(itemName) {
-        // Decrease the quantity or remove the item from the cart
-        if (itemCart[itemName].quantity > 1) {
-            itemCart[itemName].quantity--;
-        } else {
-            delete itemCart[itemName];
-        }
-        updateCart();
-    }
-    
-    function updateCart() {
-        const cartItemsContainer = document.querySelector('.cart-items');
-        cartItemsContainer.innerHTML = ''; 
-    
-        // iterate over to create new items 
-        for (const [itemName, itemDetails] of Object.entries(itemCart)) {
-            const itemElement = document.createElement('div');
-            itemElement.className = 'cart-item';
-            let itemTotalPrice = (itemDetails.price * itemDetails.quantity).toFixed(2);
-
-            itemElement.innerHTML = `${itemDetails.quantity}x ${itemName}: $${itemTotalPrice}`;
-            if (itemDetails.category === 'Meat' || itemDetails.category === 'Seafood') {
-                
-                const weightInput = document.createElement('input');
-                weightInput.type = 'number';
-                weightInput.value = itemDetails.weight || 1; // set the default to 1 or just the current weight (edge case)
-                weightInput.min = 0.1;
-                weightInput.step = 0.1;
-                weightInput.addEventListener('change', (e) => {
-                    itemDetails.weight = e.target.value;
-                    itemDetails.price = calculatePricePerPound(itemDetails.basePrice, itemDetails.weight);
-                    updateCart();
-                });
-                itemElement.appendChild(weightInput);
-                itemTotalPrice = (itemDetails.basePrice * itemDetails.weight).toFixed(2);
-            }
-            // append to cartItems 
-            cartItemsContainer.appendChild(itemElement);
-        }
-        // update total of cart
-        document.getElementById('cartTotal').textContent = calculateTotalCostOfCart();
-    }
-    
-    // for seafood and meat 
-    function calculatePricePerPound(basePrice, weight) {
-        return basePrice * weight;
-    }
-    
-    function calculateTotalCostOfCart() {
-        let totalCost = 0;
-        for (const itemDetails of Object.values(itemCart)) {
-            totalCost += itemDetails.price * (itemDetails.weight || 1);
-        }
-        return totalCost.toFixed(2); // Returns the total cost of items in the cart
-    }
-
-    
     // first apply the the filters and sort to display all items 
     applyFiltersAndSort();
 });
@@ -303,6 +232,95 @@ function showCart() {
 function closeCart() {
     console.log("CLOSING THE CART::::::::::::::");
     document.getElementById('cartSidebar').classList.remove('active');
+}
+
+function addToCart(item) {
+    // clone to avoid changing original item 
+    let itemToAdd = {...item};
+
+    if (item.category === 'Meat' || item.category === 'Seafood') {
+        // default weight set here
+        if (!itemToAdd.weight) {
+            itemToAdd.weight = 1; // default weight to 1 if none given 
+        }
+        // store base price separated, calculate total price
+        itemToAdd.basePrice = itemToAdd.price;
+        itemToAdd.totalPrice = calculatePricePerPound(itemToAdd.basePrice, itemToAdd.weight);
+    } else {
+        // for other items, just listed price
+        itemToAdd.totalPrice = itemToAdd.price;
+    }
+
+    itemCart.push(itemToAdd);
+    updateCart();
+    console.log("Item added to cart:", itemToAdd);
+}
+
+
+function removeFromCart(index) {
+    
+}
+
+function calculatePricePerPound(basePrice, weight) {
+    // check types NaN case (come back to????)
+    if (typeof basePrice === 'number' && typeof weight === 'number') {
+        return (basePrice * weight).toFixed(2);
+    }
+    else {
+        console.error("Invalid base price or weight given: ", basePrice, weight);
+        return '0.00';
+    }
+}
+
+function updateCart() {
+    const cartItemsContainer = document.querySelector('.cart-items');
+    cartItemsContainer.innerHTML = ''; // clear
+    
+    itemCart.forEach((item, index) => {
+        const itemElement = document.createElement('div');
+        itemElement.className = 'cart-item';
+        
+        //create name and price span 
+        const nameElement = document.createElement('span');
+        nameElement.textContent = `${item.name}: $${item.totalPrice}`;
+        itemElement.appendChild(nameElement);
+
+        // check for meat and seafood categories
+        if (item.category === 'Meat' || item.category === 'Seafood') {
+            const weightInput = document.createElement('input');
+            weightInput.type = 'number';
+            weightInput.value = item.weight;
+            weightInput.step = '0.1';
+            weightInput.min = '0.1';
+            weightInput.className = 'weight-input';
+
+            // account for weight changes to change total price
+            weightInput.addEventListener('change', (e) => {
+                const newWeight = parseFloat(e.target.value);
+                if (!isNaN(newWeight) && newWeight > 0) {
+                    // Update item weight and total price
+                    item.weight = newWeight;
+                    item.totalPrice = calculatePricePerPound(item.basePrice, newWeight);
+                    // update item price displayed 
+                    nameElement.textContent = `${item.name}: $${item.totalPrice}`;
+                    document.getElementById('cartTotal').textContent = calculateTotalCostOfCart();
+                }
+            });
+            itemElement.appendChild(weightInput);
+        }
+        cartItemsContainer.appendChild(itemElement);
+    });
+    
+    // update total cost 
+    document.getElementById('cartTotal').textContent = calculateTotalCostOfCart();
+}
+
+function calculateTotalCostOfCart() {
+    let totalCost = 0;
+    itemCart.forEach(item => {
+        totalCost += parseFloat(item.totalPrice);
+    });
+    return totalCost.toFixed(2); 
 }
 
 

@@ -124,7 +124,63 @@ html {
 .cart-items {
     font-family: "MrGeorge", sans-serif;
     font-size: 20px;
-    text-align: left;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.cart-item {
+    margin-bottom: 2px;
+}
+
+/* input box styling */
+.cart-item input[type='number'] {
+    border: 1px solid #CCC;
+    border-radius: 5px;
+    padding: 5px 10px;
+    margin-top: 5px;
+    width: 60px;
+    text-align: center;
+}
+
+/* style input when interacted with */
+.cart-item input[type='number']:focus {
+    outline: none;
+    border-color: #80BDFF;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.1);
+}
+
+.close-cart-btn {
+    border: 1px solid #CCC;
+    border-radius: 5px;
+    padding: 5px 10px;
+    margin-top: 5px;
+    width: 100px;
+    text-align: center;
+}
+
+.close-cart-btn:hover {
+    outline: none;
+    border-color: #80BDFF;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.1);
+}
+
+.cart-summary {
+    font-family: "MrGeorge", sans-serif;
+    text-align: center;
+    font-weight: bold;
+    font-size: 22px;
+}
+
+.cart-header {
+    font-family: arista-bold;
+    text-align: center;
+    font-size: 28px;
+    color: darkgreen;
+}
+
+.cart-total {
+    font-family: "MrGeorge", sans-serif;
+    font-style: bold;
 }
 
 .logo-icon {
